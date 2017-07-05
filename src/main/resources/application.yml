@@ -1,0 +1,33 @@
+spring:
+  profiles:
+    active: development
+server:
+    address: 127.0.0.1
+---
+spring:
+    profiles: development
+server:
+    address: 127.0.0.1
+    port: 8090
+spring:
+    jpa:
+        show-sql: true
+        hibernate:
+            ddl-auto: update
+security:
+  basic:
+    enabled: false
+---
+spring:
+    profiles: secure
+server:
+    address: 127.0.0.1
+    port: 8090
+spring:
+    jpa:
+        show-sql: true
+        hibernate:
+            ddl-auto: update
+---
+spring:
+    profiles: production

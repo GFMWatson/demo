@@ -1,0 +1,52 @@
+<div [class.dark-theme]="isDarkTheme">
+  <md-toolbar color="primary">
+    <span>
+    <md-icon class="icon-20">language</md-icon>
+    LeashedIn
+    </span>
+     <button md-icon-button [md-menu-trigger-for]="menu"><!--md-icon-button resets the default styles, pass in the local template variable for the menu that this is a trigger for-->
+      <md-icon>more_vert</md-icon> <!--three dots-->
+    </button>
+  </md-toolbar>
+    <md-menu x-position="before" #menu="mdMenu"><!--since it is on right open it to the left, or before, and export it into a local template variable, this is a floating panel-->
+    <button md-menu-item (click)="openDialog()">Settings</button>
+    <button md-menu-item (click)="isDarkTheme=!isDarkTheme">Toggle theme</button>
+    <button md-menu-item>Help</button>
+  </md-menu>
+  <md-sidenav-container>
+    <md-sidenav align="end" mode="side"  #sidenav>
+
+      <md-tab-group>
+        <md-tab>
+          <ng-template md-tab-label>Details</ng-template>
+          <!--<ng-template md-tab-content>this doesn't seem to work-->
+            <p>CONTENT</p>
+            <p>Name: {{currentDog.name}}</p>
+            <p>Human: {{currentDog.human}}</p>
+            <p>Age: {{currentDog.age}}</p>
+          <!--</ng-template>-->
+          <button md-raised-button (click)="sidenav.close()" color="accent">CLOSE</button>
+        </md-tab>
+        <md-tab>
+          <ng-template md-tab-label>Feed</ng-template>
+          <!--<ng-template md-tab-content></ng-template>-->
+        </md-tab>
+      </md-tab-group>
+
+    </md-sidenav>
+
+    <md-grid-list cols="4" rowHeight="200px">
+      <md-grid-tile *ngFor="let dog of dogs" [rowspan]="dog.rows">
+        <img src="assets/{{dog.name}}.png" alt="photo of {{dog.name}}">
+        <md-grid-tile-footer>
+          <h3 md-line>{{dog.name}}</h3>
+          <span md-line>Human: {{dog.human}}</span>
+          <button md-icon-button (click)="showDog(dog)">
+          <md-icon>info</md-icon>
+          </button>
+        </md-grid-tile-footer>
+
+      </md-grid-tile>
+    </md-grid-list>
+  </md-sidenav-container>
+</div>
